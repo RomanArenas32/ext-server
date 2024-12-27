@@ -3,16 +3,16 @@ const Product = require('../models/products');
 const createProduct = async (req, res) => {
     console.log("second")
     try {
-        const { img, nombre, precio, descripcion, unidades, color } = req.body;
+        const { img, nombre, precio, descripcion, unidades, color, categoria } = req.body;
 
-        if (!nombre || !precio || !descripcion || !unidades || !color) {
+        if (!nombre || !precio || !descripcion || !unidades || !color || !categoria) {
             return res.status(400).json({
                 ok: false,
                 message: 'Todos los campos son obligatorios.',
             });
         }
 
-        const newProduct = new Product({ img, nombre, precio, descripcion, unidades, color });
+        const newProduct = new Product({ img, nombre, precio, descripcion, unidades, color, categoria });
         await newProduct.save();
 
         return res.status(201).json({

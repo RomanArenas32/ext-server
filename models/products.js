@@ -18,6 +18,10 @@ const productSchema = Schema({
         type: String,
         required: [true, "Coloque una descripcion"],
     },
+    categoria: {
+        type: String,
+        required: [true, "Coloque una catgoria"],
+    },
     unidades: {
         type: Number,
         required: [true, "Coloque una cantidad"],
