@@ -1,7 +1,7 @@
 const { Schema, model } = require('mongoose');
 
 
-const productSchema = Schema({
+const serviceSchema = Schema({
 
     img: {
         type: String,
@@ -22,15 +22,7 @@ const productSchema = Schema({
         type: String,
         required: [true, "Coloque una catgoria"],
     },
-    unities: {
-        type: Number,
-        required: [true, "Coloque una cantidad"],
-    },
-    color: {
-        type: String,
-        required: [true, "Coloque un color"],
-    }
 });
 
 
-module.exports = model("Product", productSchema);
+module.exports = model("Service", serviceSchema);

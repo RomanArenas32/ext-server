@@ -1,30 +1,29 @@
 const Product = require('../models/products');
 
 const createProduct = async (req, res) => {
-    console.log("second")
     try {
-        const { img, nombre, precio, descripcion, unidades, color, categoria } = req.body;
+        const { img, name, price, description, unities, color, category } = req.body;
 
-        if (!nombre || !precio || !descripcion || !unidades || !color || !categoria) {
+        if (!name || !price || !description || !unities || !color || !category) {
             return res.status(400).json({
                 ok: false,
-                message: 'Todos los campos son obligatorios.',
+                message: 'All inputs required.',
             });
         }
 
-        const newProduct = new Product({ img, nombre, precio, descripcion, unidades, color, categoria });
+        const newProduct = new Product({ img, name, price, description, unities, color, category });
         await newProduct.save();
 
         return res.status(201).json({
             ok: true,
-            message: 'Producto creado con éxito.',
+            message: 'Producto created.',
             product: newProduct,
         });
     } catch (error) {
-        console.error('Error al crear el producto:', error);
+        console.error('Error:', error);
         return res.status(500).json({
             ok: false,
-            message: 'Error al crear el producto. Por favor, intente nuevamente.',
+            message: 'Error.',
         });
     }
 };
@@ -47,16 +46,13 @@ const getProducts = async (req, res) => {
 
 const getProductById = async (req, res) => {
     try {
-        const { id } = req.params;  // Obtener el id de los parámetros de la URL
-
-        // Buscar el producto por id
+        const { id } = req.params;  
         const product = await Product.findById(id);
 
-        // Verificar si el producto existe
         if (!product) {
             return res.status(404).json({
                 ok: false,
-                message: 'Producto no encontrado.',
+                message: 'Product not found.',
             });
         }
 
@@ -68,7 +64,7 @@ const getProductById = async (req, res) => {
         console.error('Error al obtener el producto:', error);
         return res.status(500).json({
             ok: false,
-            message: 'Error al obtener el producto. Por favor, intente nuevamente.',
+            message: 'Error.',
         });
     }
 };
