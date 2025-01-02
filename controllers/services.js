@@ -32,7 +32,7 @@ const createService = async (req, res) => {
 
 const getServices = async (req, res) => {
     try {
-        const services = await Product.find();
+        const services = await Service.find();
         return res.json({
             ok: true,
             services,
