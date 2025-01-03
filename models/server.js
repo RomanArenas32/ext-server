@@ -10,6 +10,8 @@ class AppServer {
         this.PORT = process.env.PORT;
         this.productPath = '/products';
         this.servicePath = '/services';
+        this.orderPath = '/orders';
+
 
         // db connection
         this.dbConnecion();
@@ -32,6 +34,7 @@ class AppServer {
     routes() {
         this.app.use(this.productPath, require('../routes/products'));
         this.app.use(this.servicePath, require('../routes/service'));
+        this.app.use(this.orderPath, require('../routes/orders'));
     }
 
     listen() {

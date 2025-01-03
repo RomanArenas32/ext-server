@@ -48,7 +48,7 @@ const getProductById = async (req, res) => {
     try {
         const { id } = req.params;  
         const product = await Product.findById(id);
-
+        console.log("product", product)
         if (!product) {
             return res.status(404).json({
                 ok: false,
