@@ -27,7 +27,7 @@ class AppServer {
 
     middlewares() {
         const corsOptions = {
-            origin: ['http://localhost:3000', 'https://willowy-baklava-e089e5.netlify.app'], 
+            origin: ['http://localhost:3000', 'https://hilarious-semifreddo-833013.netlify.app'], 
             methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
             allowedHeaders: ['Content-Type', 'Authorization'],
             credentials: true,
