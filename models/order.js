@@ -12,11 +12,12 @@ const orderSchema = new Schema({
         type: String,
         enum: ["Transfer", "cash"], 
         default: "Transfer",
-        required: false,
+        required: true,
     },
     code: {
         type: String,
         unique: true,
+        required: true,
     },
     total: {
         type: Number,
