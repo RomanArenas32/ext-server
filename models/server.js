@@ -26,9 +26,16 @@ class AppServer {
     }
 
     middlewares() {
-        this.app.use(express.json()); // Formatea todo lo que viene en formato json
-        this.app.use(cors()); // Soluciona errores de los cors
-        this.app.use(express.static('public')); // Renderiza el html de la carpeta public
+        const corsOptions = {
+            origin: ['http://localhost:3000', 'https://willowy-baklava-e089e5.netlify.app'], 
+            methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+            allowedHeaders: ['Content-Type', 'Authorization'],
+            credentials: true,
+            optionsSuccessStatus: 200
+        };
+        this.app.use(cors(corsOptions));
+        this.app.use(express.json()); 
+        this.app.use(express.static('public')); 
     }
 
     routes() {
