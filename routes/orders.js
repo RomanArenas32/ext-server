@@ -5,7 +5,7 @@ const router = Router();
 
 router.post('/', generateOrder);
 router.get('/', getOrders);
-router.patch('/canceled', canceledOrder);
+router.patch('/canceled/:id', canceledOrder);
 
 
 

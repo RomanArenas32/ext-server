@@ -52,7 +52,7 @@ const generateOrder = async (req, res) => {
 
 
 const canceledOrder = async (req, res) => {
-   const { id, status } = req.params;
+   const { id } = req.params;
     try {
         const order = await Order.findById(id);
         if (!order) {
@@ -67,7 +67,7 @@ const canceledOrder = async (req, res) => {
                 message: 'Order has been canceled.',
             });
         }
-        order.status = status;
+        order.status = "canceled";
         await order.save();
         return res.json({
             ok: true,
