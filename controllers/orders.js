@@ -3,16 +3,17 @@ const Product = require('../models/products');
 
 const generateOrder = async (req, res) => {
     console.log("first")
+    console.log(req.body)
     try {
-        const { productId, paymentMethod, code, status } = req.body;
-        if (!productId || !code) {
+        const { productId, paymentMethod, code, status, total } = req.body;
+        if (!productId || !code || !total) {
             return res.status(400).json({
                 ok: false,
                 message: 'Product ID and code are required.',
             });
         }
-
         const productExists = await Product.findById(productId);
+        console.log(productExists)
         if (!productExists) {
             return res.status(404).json({
                 ok: false,
@@ -24,6 +25,7 @@ const generateOrder = async (req, res) => {
             product: productId,
             paymentMethod: paymentMethod || "Transfer", 
             code,
+            total,
             status: status || "pending",
         });
 

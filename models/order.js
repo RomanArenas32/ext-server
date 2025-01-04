@@ -18,6 +18,10 @@ const orderSchema = new Schema({
         type: String,
         unique: true,
     },
+    total: {
+        type: Number,
+        required: true,
+    },
     status: {
         type: String,
         enum: ["canceled", "pending", "confirm"], 
