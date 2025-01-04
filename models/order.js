@@ -27,6 +27,18 @@ const orderSchema = new Schema({
         enum: ["canceled", "pending", "confirm"], 
         default: "pending", 
     },
+    name: {
+        type: String,
+        required: true,
+    },
+    color: {
+        type: String,
+        required: false,
+    },
+    size: {
+        type: String,
+        required: false,
+    },
 });
 
 module.exports = model("Order", orderSchema);

@@ -5,7 +5,7 @@ const generateOrder = async (req, res) => {
     console.log("first")
     console.log(req.body)
     try {
-        const { productId, paymentMethod, code, status, total } = req.body;
+        const { productId, paymentMethod, code, status, total, color, size, name } = req.body;
         if (!productId || !code || !total) {
             return res.status(400).json({
                 ok: false,
@@ -26,6 +26,9 @@ const generateOrder = async (req, res) => {
             paymentMethod: paymentMethod || "Transfer", 
             code,
             total,
+            name,
+            color,
+            size,
             status: status || "pending",
         });
 
