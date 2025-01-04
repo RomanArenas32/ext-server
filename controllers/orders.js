@@ -1,29 +1,29 @@
 const Order = require('../models/order');
-const Product = require('../models/products'); 
-
+const Product = require('../models/products');
 const generateOrder = async (req, res) => {
-    console.log("first")
-    console.log(req.body)
+    console.log("Inicio de la solicitud"); // Log para trazar el inicio
+    console.log(req.body);
+
     try {
         const { productId, paymentMethod, code, status, total, color, size, name, quantity } = req.body;
         if (!productId || !code || !total) {
             return res.status(400).json({
                 ok: false,
-                message: 'Product ID and code are required.',
+                message: 'Product ID, code, and total are required.',
             });
         }
         const productExists = await Product.findById(productId);
-        console.log(productExists)
+        console.log("Producto encontrado:", productExists);
+
         if (!productExists) {
             return res.status(404).json({
                 ok: false,
                 message: 'Product not found.',
             });
         }
-
         const newOrder = new Order({
             product: productId,
-            paymentMethod: paymentMethod || "Transfer", 
+            paymentMethod: paymentMethod || "Transfer",
             code,
             total,
             name,
@@ -34,6 +34,7 @@ const generateOrder = async (req, res) => {
         });
 
         await newOrder.save();
+        console.log("Orden creada:", newOrder);
 
         return res.status(201).json({
             ok: true,
@@ -48,6 +49,41 @@ const generateOrder = async (req, res) => {
         });
     }
 };
+
+
+const canceledOrder = async (req, res) => {
+   const { id, status } = req.params;
+    try {
+        const order = await Order.findById(id);
+        if (!order) {
+            return res.status(404).json({
+                ok: false,
+                message: 'Order not found.',
+            });
+        }
+        if(order.status === 'canceled') {
+            return res.status(400).json({
+                ok: false,
+                message: 'Order has been canceled.',
+            });
+        }
+        order.status = status;
+        await order.save();
+        return res.json({
+            ok: true,
+            message: 'Order canceled successfully.',
+            order,
+        });
+    } catch (error) {
+        console.error('Error:', error);
+        return res.status(500).json({
+            ok: false,
+            message: 'An error occurred while canceled the order.',
+        });
+    }
+};
+
+
 const getOrders = async (req, res) => {
     try {
         const orders = await Order.find();
@@ -67,4 +103,5 @@ const getOrders = async (req, res) => {
 module.exports = {
     generateOrder,
     getOrders,
+    canceledOrder,
 };
