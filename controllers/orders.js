@@ -61,6 +61,7 @@ const canceledOrder = async (req, res) => {
                 message: 'Order not found.',
             });
         }
+        console.log("Order:", order);
         if(order.status === 'canceled') {
             return res.status(400).json({
                 ok: false,
