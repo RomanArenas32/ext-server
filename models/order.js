@@ -44,6 +44,10 @@ const orderSchema = new Schema({
         type: Number,
         required: false,
     },
+    seller: {
+        type: String,
+        required: true,
+    }
 });
 
 module.exports = model("Order", orderSchema);
