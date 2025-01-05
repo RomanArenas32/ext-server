@@ -4,15 +4,12 @@ const Product = require('../models/products');
 
 
 const generateOrder = async (req, res) => {
-    console.log("Inicio de la solicitud"); // Log para trazar el inicio
-    console.log(req.body);
-
     try {
         const { productId, paymentMethod, status, total, color, size, name, quantity, seller } = req.body;
-        if (!productId || !code || !total) {
+        if (!productId || !total) {
             return res.status(400).json({
                 ok: false,
-                message: 'Product ID, code, and total are required.',
+                message: 'Product ID, and total are required.',
             });
         }
         const productExists = await Product.findById(productId);
