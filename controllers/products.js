@@ -2,16 +2,16 @@ const Product = require('../models/products');
 
 const createProduct = async (req, res) => {
     try {
-        const { img, name, price, description, unities, color, category } = req.body;
+        const { img, name, price, description, unities, color, category, seller } = req.body;
 
-        if (!name || !price || !description || !unities || !color || !category) {
+        if (!name || !price || !description || !unities || !color || !category || !seller) {
             return res.status(400).json({
                 ok: false,
                 message: 'All inputs required.',
             });
         }
 
-        const newProduct = new Product({ img, name, price, description, unities, color, category });
+        const newProduct = new Product({ img, name, price, description, unities, color, category, seller });
         await newProduct.save();
 
         return res.status(201).json({

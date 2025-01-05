@@ -22,6 +22,10 @@ const serviceSchema = Schema({
         type: String,
         required: [true, "Coloque una catgoria"],
     },
+    seller: {
+        type: String,
+        required: [true, "Coloque un vendedor"],
+    },
 });
 
 

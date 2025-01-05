@@ -29,7 +29,11 @@ const productSchema = Schema({
     color: {
         type: String,
         required: [true, "Coloque un color"],
-    }
+    },
+    seller: {
+        type: String,
+        required: [true, "Coloque un vendedor"],
+    },
 });
 
 
