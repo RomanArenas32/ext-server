@@ -11,6 +11,7 @@ class AppServer {
         this.productPath = '/products';
         this.servicePath = '/services';
         this.orderPath = '/orders';
+        this.chatsPath = '/chats';
 
 
         // db connection
@@ -42,6 +43,7 @@ class AppServer {
         this.app.use(this.productPath, require('../routes/products'));
         this.app.use(this.servicePath, require('../routes/service'));
         this.app.use(this.orderPath, require('../routes/orders'));
+        this.app.use(this.chatsPath, require('../routes/chats'));
     }
 
     listen() {
