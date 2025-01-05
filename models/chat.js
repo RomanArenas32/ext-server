@@ -8,7 +8,7 @@ const messageSchema = new Schema({
 const chatSchema = new Schema({
   messages: [messageSchema],
   createdAt: { type: Date, default: Date.now },
-  code: { type: String, required: true },
+  code: { type: String, required: true, unique: true },
   seller: { type: String, required: true },
 });
 

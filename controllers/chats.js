@@ -4,14 +4,18 @@ const createChat = async (req, res) => {
     console.log("first");
 
     const { code, seller } = req.body;
-
+    console.log(code, seller)
     if (!code || !seller) {
         return res.status(400).json({ message: 'El código y el vendedor son obligatorios.' });
+    }
+    const chatExists = await Chat.findOne(code);
+    if(chatExists){
+        return res.status(400).json({ message: 'El chat ya existe.' });
     }
 
     try {
         const newChat = new Chat({
-            productCode: code,    
+            code, 
             seller, 
             messages: [
                 {
@@ -29,6 +33,7 @@ const createChat = async (req, res) => {
         res.status(500).json({ message: 'Error al crear el chat.', error: error.message });
     }
 };
+
 
 
 const getAllChats = async (req, res) => {
