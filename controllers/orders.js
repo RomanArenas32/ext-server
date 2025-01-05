@@ -99,24 +99,24 @@ const confirmOrder = async (req, res) => {
              });
          }
          console.log("Order:", order);
-         if(order.status === 'canceled') {
+         if(order.status === 'confirm') {
              return res.status(400).json({
                  ok: false,
-                 message: 'Order has been canceled.',
+                 message: 'Order has been confirm.',
              });
          }
          order.status = "confirm";
          await order.save();
          return res.json({
              ok: true,
-             message: 'Order canceled successfully.',
+             message: 'Order confirm successfully.',
              order,
          });
      } catch (error) {
          console.error('Error:', error);
          return res.status(500).json({
              ok: false,
-             message: 'An error occurred while canceled the order.',
+             message: 'An error occurred while confirm the order.',
          });
      }
  };
