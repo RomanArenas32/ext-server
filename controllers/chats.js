@@ -1,18 +1,25 @@
 const Chat = require('../models/chat');
 
 const createChat = async (req, res) => {
-    console.log("first")
+    console.log("first");
+
+    const { code, seller } = req.body;
+
+    if (!code || !seller) {
+        return res.status(400).json({ message: 'El código y el vendedor son obligatorios.' });
+    }
+
     try {
         const newChat = new Chat({
+            productCode: code,    
+            seller, 
             messages: [
                 {
                     content: '¡Hola! Soy la máquina, ¿en qué puedo ayudarte?',
                 },
             ],
         });
-
         await newChat.save();
-
         res.status(201).json({
             message: 'Chat creado exitosamente.',
             chat: newChat,
@@ -41,9 +48,7 @@ const getAllChats = async (req, res) => {
 
 
 const getChatById = async (req, res) => {
-    console.log("1")
     const { id } = req.params; // Obtiene el ID desde los parámetros de la URL
-console.log("id",id)
     try {
         const chat = await Chat.findById(id); // Busca el chat por ID
 

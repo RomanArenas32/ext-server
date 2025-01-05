@@ -1,15 +1,15 @@
 const { Schema, model } = require('mongoose');
 
-// Esquema de un mensaje
 const messageSchema = new Schema({
-  content: { type: String, required: true }, // El contenido del mensaje
-  timestamp: { type: Date, default: Date.now }, // Marca de tiempo
+  content: { type: String, required: true }, 
+  timestamp: { type: Date, default: Date.now }, 
 });
 
-// Esquema para un chat (solo historial de mensajes)
 const chatSchema = new Schema({
-  messages: [messageSchema], // Lista de mensajes del chat
-  createdAt: { type: Date, default: Date.now }, // Fecha de creación del chat
+  messages: [messageSchema],
+  createdAt: { type: Date, default: Date.now },
+  code: { type: String, required: true },
+  seller: { type: String, required: true },
 });
 
 module.exports = model('Chat', chatSchema);
