@@ -34,6 +34,7 @@ const generateOrder = async (req, res) => {
             code: new Date().getTime(),
             status: status || "pending",
         });
+        console.log("Nueva orden:", newOrder);
 
         await newOrder.save();
         console.log("Orden creada:", newOrder);

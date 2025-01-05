@@ -8,7 +8,7 @@ const createChat = async (req, res) => {
     if (!code || !seller) {
         return res.status(400).json({ message: 'El código y el vendedor son obligatorios.' });
     }
-    const chatExists = await Chat.findOne(code);
+    const chatExists = await Chat.findOne({code});
     if(chatExists){
         return res.status(400).json({ message: 'El chat ya existe.' });
     }
