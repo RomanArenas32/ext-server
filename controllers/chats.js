@@ -19,7 +19,7 @@ const createChat = async (req, res) => {
             seller, 
             messages: [
                 {
-                    content: '¡Hola! Soy la máquina, ¿en qué puedo ayudarte?',
+                    content: '¡Hola! Gracias por efectuar la compra. En breve nos pondremos en contacto contigo.',
                 },
             ],
         });
