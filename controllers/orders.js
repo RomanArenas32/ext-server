@@ -5,7 +5,7 @@ const generateOrder = async (req, res) => {
     console.log(req.body);
 
     try {
-        const { productId, paymentMethod, code, status, total, color, size, name, quantity, seller } = req.body;
+        const { productId, paymentMethod, status, total, color, size, name, quantity, seller } = req.body;
         if (!productId || !code || !total) {
             return res.status(400).json({
                 ok: false,
@@ -24,7 +24,7 @@ const generateOrder = async (req, res) => {
         const newOrder = new Order({
             product: productId,
             paymentMethod: paymentMethod || "Transfer",
-            code,
+            code: new Date().getTime(),
             total,
             name,
             color,
