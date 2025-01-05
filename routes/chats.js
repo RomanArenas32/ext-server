@@ -4,8 +4,8 @@ const { createChat, getAllChats, getChatById } = require('../controllers/chats')
 const router = Router();
 
 router.post('/', createChat);
-router.get('/chats', getAllChats);
-router.get('/chats/:id', getChatById);
+router.get('/', getAllChats);
+router.get('/:id', getChatById);
 
 
 

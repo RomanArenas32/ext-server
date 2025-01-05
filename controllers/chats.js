@@ -25,6 +25,7 @@ const createChat = async (req, res) => {
 
 
 const getAllChats = async (req, res) => {
+    console.log("first")
     try {
         const chats = await Chat.find(); // Recupera todos los chats
 
@@ -40,8 +41,9 @@ const getAllChats = async (req, res) => {
 
 
 const getChatById = async (req, res) => {
+    console.log("1")
     const { id } = req.params; // Obtiene el ID desde los parámetros de la URL
-
+console.log("id",id)
     try {
         const chat = await Chat.findById(id); // Busca el chat por ID
 
