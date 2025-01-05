@@ -72,28 +72,23 @@ const getChatById = async (req, res) => {
 };
 
 const addMessageToChat = async (req, res) => {
-    const { id } = req.params; // Obtiene el ID del chat desde los parámetros de la URL
-    const { content } = req.body; // Obtiene el contenido del mensaje desde el cuerpo de la solicitud
+    const { id } = req.params; 
+    const { content } = req.body; 
     
     if (!content) {
         return res.status(400).json({ message: 'El contenido del mensaje es obligatorio.' });
     }
 
     try {
-        // Buscar el chat por ID
         const chat = await Chat.findById(id);
 
         if (!chat) {
             return res.status(404).json({ message: 'Chat no encontrado.' });
         }
-
-        // Agregar el nuevo mensaje al historial de mensajes
         chat.messages.push({
             content,
             timestamp: new Date(),
         });
-
-        // Guardar los cambios en la base de datos
         await chat.save();
 
         res.status(200).json({

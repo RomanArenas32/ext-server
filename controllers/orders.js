@@ -86,6 +86,40 @@ const canceledOrder = async (req, res) => {
 };
 
 
+const confirmOrder = async (req, res) => {
+    const { id } = req.params;
+     try {
+         const order = await Order.findById(id);
+         if (!order) {
+             return res.status(404).json({
+                 ok: false,
+                 message: 'Order not found.',
+             });
+         }
+         console.log("Order:", order);
+         if(order.status === 'canceled') {
+             return res.status(400).json({
+                 ok: false,
+                 message: 'Order has been canceled.',
+             });
+         }
+         order.status = "confirm";
+         await order.save();
+         return res.json({
+             ok: true,
+             message: 'Order canceled successfully.',
+             order,
+         });
+     } catch (error) {
+         console.error('Error:', error);
+         return res.status(500).json({
+             ok: false,
+             message: 'An error occurred while canceled the order.',
+         });
+     }
+ };
+
+
 const getOrders = async (req, res) => {
     try {
         const orders = await Order.find();
@@ -106,4 +140,5 @@ module.exports = {
     generateOrder,
     getOrders,
     canceledOrder,
+    confirmOrder,
 };
