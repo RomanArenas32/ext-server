@@ -1,5 +1,8 @@
 const Order = require('../models/order');
 const Product = require('../models/products');
+
+
+
 const generateOrder = async (req, res) => {
     console.log("Inicio de la solicitud"); // Log para trazar el inicio
     console.log(req.body);
@@ -31,6 +34,7 @@ const generateOrder = async (req, res) => {
             size,
             quantity,
             seller,
+            code: new Date().getTime(),
             status: status || "pending",
         });
 
