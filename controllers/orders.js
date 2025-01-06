@@ -164,6 +164,7 @@ const getOrderByCode = async (req, res) => {
 
 
 const getOrderById = async (req, res) => {
+    console.log("first")
     const { id } = req.params;
     try {
         const order = await Order.findById(id);
