@@ -166,7 +166,7 @@ const getOrderByCode = async (req, res) => {
 const getOrderById = async (req, res) => {
     const { id } = req.params;
     try {
-        const order = await Order.findOne({id});
+        const order = await Order.findById(id);
         if(!order) {
             return res.status(404).json({
                 ok: false,
