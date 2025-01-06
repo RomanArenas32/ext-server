@@ -162,10 +162,35 @@ const getOrderByCode = async (req, res) => {
     }
 }
 
+
+const getOrderById = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const order = await Order.findOne({id});
+        if(!order) {
+            return res.status(404).json({
+                ok: false,
+                message: 'Order not found.',
+            });
+        }
+        return res.json({
+            ok: true,
+            order,
+        });
+    } catch (error) {
+        console.error('Error get order:', error);
+        return res.status(500).json({
+            ok: false,
+            message: 'Error.',
+        });
+    }
+}
+
 module.exports = {
     generateOrder,
     getOrders,
     canceledOrder,
     confirmOrder,
     getOrderByCode,
+    getOrderById
 };
